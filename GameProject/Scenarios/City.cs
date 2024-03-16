@@ -24,10 +24,13 @@ _-----.|/| //:\_[=|\`-------8                   8 -|-|                      |
 LS|/  /             \______________________________________________________");
 
             Add("");
-            Add("1) Entrar na cidade    2) Ir para os quarteis");
+            Add("1) Entrar na cidade    2) Ir para o quartel");
         }
 
         public override void ProcessPlayerAction() {
+            while(!ValidatePlayerAction())
+                RequestPlayerAction();
+
             switch(currentPlayerAction) {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
@@ -43,6 +46,12 @@ LS|/  /             \______________________________________________________");
 
                 break;
             }
+        }
+
+        public override bool ValidatePlayerAction() {
+            List<ConsoleKey> keys = new List<ConsoleKey>() { ConsoleKey.D1, ConsoleKey.NumPad1, ConsoleKey.D2, ConsoleKey.NumPad2 };
+
+            return keys.Contains(currentPlayerAction);
         }
     }
 }

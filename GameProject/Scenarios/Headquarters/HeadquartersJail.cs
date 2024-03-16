@@ -30,5 +30,7 @@ namespace GameProject.Scenarios.Headquarters {
         public override void ProcessPlayerAction() {
             Move(new City());
         }
+
+        public override bool ValidatePlayerAction() { return true; }
     }
 }

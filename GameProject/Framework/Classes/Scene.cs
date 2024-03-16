@@ -1,5 +1,8 @@
 ﻿namespace Framework.Framework.Classes {
     internal abstract class Scene {
+
+        #region Atributes
+
         private World World;
         private int Top;
         protected ConsoleKey currentPlayerAction;
@@ -9,6 +12,10 @@
 
             Top = 0;
         }
+
+        #endregion Atributes
+
+        #region Public Methods
 
         public void Add(string text) {
             Top += World.Draw(Top, 0, text);
@@ -32,6 +39,13 @@
             scene.Show();
         }
 
+        #endregion Public Methods
+
+        #region Abstract Methods
+
         public abstract void ProcessPlayerAction();
+        public abstract bool ValidatePlayerAction();
+
+        #endregion Abstract Methods
     }
 }

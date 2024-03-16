@@ -29,6 +29,9 @@ namespace GameProject.Scenarios.Headquarters {
         }
 
         public override void ProcessPlayerAction() {
+            while(!ValidatePlayerAction())
+                RequestPlayerAction();
+
             switch(currentPlayerAction) {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
@@ -51,6 +54,12 @@ namespace GameProject.Scenarios.Headquarters {
 
                 break;
             }
+        }
+
+        public override bool ValidatePlayerAction() {
+            List<ConsoleKey> keys = new List<ConsoleKey>() { ConsoleKey.D1, ConsoleKey.NumPad1, ConsoleKey.D2, ConsoleKey.NumPad2, ConsoleKey.D3, ConsoleKey.NumPad3 };
+
+            return keys.Contains(currentPlayerAction);
         }
     }
 }
