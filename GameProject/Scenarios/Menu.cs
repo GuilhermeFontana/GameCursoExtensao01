@@ -4,7 +4,7 @@ using GameProject.Scenarios;
 namespace Framework.Scenarios {
     internal class Menu : Scene {
 
-        public Menu() {
+        public Menu() : base(true) {
                          Add(@"
 .               ▄██████▄     ▄████████   ▄▄▄▄███▄▄▄▄      ▄████████ 
                ███    ███   ███    ███ ▄██▀▀▀███▀▀▀██▄   ███    ███ 
@@ -28,13 +28,13 @@ namespace Framework.Scenarios {
             Add("");
             Add("1) Jogar   Other) Sair");
         }
-
+        
         public override void ProcessPlayerAction() {
             switch(currentPlayerAction) {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
                 
-                Move(new City());
+                Move(new PlayerCreation());
                 
                 break;
 

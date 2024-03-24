@@ -23,7 +23,7 @@ namespace GameProject.Scenarios.Headquarters {
  | ______I_N______ | / oooooooooooo[] ooo\  |=|     | _______OUT_______ |");
 
             Add("");
-            Add("1) Mostrar autorização    2) Insultar ele");
+            Add("1) Mostrar autorização    2) Insultar ele     E) Backpack");
         }
 
         public override void ProcessPlayerAction() {
@@ -34,21 +34,30 @@ namespace GameProject.Scenarios.Headquarters {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
 
-                Console.WriteLine("Entrou");
+                    Console.WriteLine("Entrou");
 
                 break;
 
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
 
-                Move(new HeadquartersJail());
+                    Move(new HeadquartersJail());
+
+                break;
+                case ConsoleKey.E:
+
+                    Move(new Backpack(this));
 
                 break;
             }
         }
 
         public override bool ValidatePlayerAction() {
-            List<ConsoleKey> keys = new List<ConsoleKey>() { ConsoleKey.D1, ConsoleKey.NumPad1, ConsoleKey.D2, ConsoleKey.NumPad2 };
+            List<ConsoleKey> keys = new List<ConsoleKey>() { 
+                ConsoleKey.D1, ConsoleKey.NumPad1, 
+                ConsoleKey.D2, ConsoleKey.NumPad2,
+                ConsoleKey.E
+            };
 
             return keys.Contains(currentPlayerAction);
         }

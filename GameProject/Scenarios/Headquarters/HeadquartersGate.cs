@@ -25,7 +25,7 @@ namespace GameProject.Scenarios.Headquarters {
 | |_________________________________________________________________________| |");
 
             Add("");
-            Add("1) Invadir    2) Mostrar credenciais      3) Voltar para cidade");
+            Add("1) Invadir    2) Mostrar credenciais      3) Voltar para cidade     E) Backpack");
         }
 
         public override void ProcessPlayerAction() {
@@ -35,29 +35,39 @@ namespace GameProject.Scenarios.Headquarters {
             switch(currentPlayerAction) {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                Move(new HeadquartersJail());
 
+                    Move(new HeadquartersJail());
 
                 break;
 
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
 
-                Move(new HeadquartersOffice());
+                    Move(new HeadquartersOffice());
 
                 break;
 
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
 
-                Move(new City());
+                    Move(new City());
+
+                break;
+                case ConsoleKey.E:
+
+                    Move(new Backpack(this));
 
                 break;
             }
         }
 
         public override bool ValidatePlayerAction() {
-            List<ConsoleKey> keys = new List<ConsoleKey>() { ConsoleKey.D1, ConsoleKey.NumPad1, ConsoleKey.D2, ConsoleKey.NumPad2, ConsoleKey.D3, ConsoleKey.NumPad3 };
+            List<ConsoleKey> keys = new List<ConsoleKey>() { 
+                ConsoleKey.D1, ConsoleKey.NumPad1, 
+                ConsoleKey.D2, ConsoleKey.NumPad2, 
+                ConsoleKey.D3, ConsoleKey.NumPad3 ,
+                ConsoleKey.E
+            };
 
             return keys.Contains(currentPlayerAction);
         }

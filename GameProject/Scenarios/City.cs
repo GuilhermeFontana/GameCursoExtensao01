@@ -1,4 +1,5 @@
 ﻿using Framework.Framework.Classes;
+using GameProject.Framework.Classes;
 using GameProject.Scenarios.Headquarters;
 
 
@@ -24,7 +25,7 @@ _-----.|/| //:\_[=|\`-------8                   8 -|-|                      |
 LS|/  /             \______________________________________________________");
 
             Add("");
-            Add("1) Entrar na cidade    2) Ir para o quartel");
+            Add("1) Entrar     2) Ir para o quartel     3) Loja     4)Trabalhar      E) Backpack");
         }
 
         public override void ProcessPlayerAction() {
@@ -45,11 +46,28 @@ LS|/  /             \______________________________________________________");
                 Move(new HeadquartersGate());
 
                 break;
+
+                case ConsoleKey.D3:
+                case ConsoleKey.NumPad3:
+
+                Move(new Shop());
+
+                break;
+                case ConsoleKey.E:
+                    Move(new Backpack(this));
+                break;
+
             }
         }
 
         public override bool ValidatePlayerAction() {
-            List<ConsoleKey> keys = new List<ConsoleKey>() { ConsoleKey.D1, ConsoleKey.NumPad1, ConsoleKey.D2, ConsoleKey.NumPad2 };
+            List<ConsoleKey> keys = new List<ConsoleKey>() {
+                ConsoleKey.D1, ConsoleKey.NumPad1, 
+                ConsoleKey.D2, ConsoleKey.NumPad2, 
+                ConsoleKey.D3, ConsoleKey.NumPad3, 
+                ConsoleKey.D4, ConsoleKey.NumPad4,
+                ConsoleKey.E
+            };
 
             return keys.Contains(currentPlayerAction);
         }

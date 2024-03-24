@@ -7,10 +7,17 @@
         private int Top;
         protected ConsoleKey currentPlayerAction;
 
-        public Scene() {
-            World = new World(20, 80);
 
+        public Scene() {
             Top = 0;
+
+            World = new World(20, 80);
+        }
+
+        public Scene(bool supressPlayerCreation) {
+            Top = 0;
+
+            World = new World(20, 80, supressPlayerCreation);
         }
 
         #endregion Atributes

@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using GameProject.Framework.Classes;
 
 namespace Framework.Framework.Classes {
     internal class World
@@ -9,12 +9,22 @@ namespace Framework.Framework.Classes {
         private int ColumnsNumber { get; set; }
         private char[,] Map { get; set; }
 
+        private bool SupressPlayerCreation;
 
-        public World(int rowsNumber, int columnsNumber)
-        {
-            RowsNumber = rowsNumber + 2;
+
+        public World(int rowsNumber, int columnsNumber) {
+            RowsNumber = rowsNumber + 3;
             ColumnsNumber = columnsNumber + 2;
-            Map = new char[rowsNumber + 2, columnsNumber + 2];
+            Map = new char[rowsNumber + 3, columnsNumber + 2];
+            SupressPlayerCreation = false;
+
+            Fill();
+        }
+        public World(int rowsNumber, int columnsNumber, bool supressPlayerCreation) {
+            RowsNumber = rowsNumber + 3;
+            ColumnsNumber = columnsNumber + 2;
+            Map = new char[rowsNumber + 3, columnsNumber + 2];
+            SupressPlayerCreation = supressPlayerCreation;
 
             Fill();
         }
@@ -48,6 +58,15 @@ namespace Framework.Framework.Classes {
                     Map[i, ColumnsNumber - 1] = '╝';
             }
 
+            if(SupressPlayerCreation)
+                return;
+
+            Player player = Player.GetInstance();
+            int index = 1;
+            foreach(char c in player.ToString()) {
+                Map[1, index++] = c;
+            }
+
         }
         #endregion Private Methods
 
@@ -62,11 +81,11 @@ namespace Framework.Framework.Classes {
 
             List<string> parts = new List<string>(text.Replace("\r", "").Trim().Split('\n'));
 
-            int size = rowStart + 1 + parts.Count();
+            int size = rowStart + 2 + parts.Count();
             if (size > RowsNumber)
                 throw new Exception($"Out of bounds. Size: {size}. Limit: {RowsNumber}");
 
-            int rowIndex = rowStart + 1;
+            int rowIndex = rowStart + 2;
             int _columnStart = columnStart + 1;
             foreach (string part in parts)
             {
